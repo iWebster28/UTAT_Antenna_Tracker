@@ -11,8 +11,8 @@ The tracker will need to use it's own location data with the recieved telemetry 
 A GPS or gyro module could be used to track z-position (altitude), pitch, and yaw of the tracker, and move the motors accordingly until the (z, p, y) vector is within a suitable range of error of the true computed vector. (i.e. 0.1 degrees)
 
 ### Utilized Hardware:
-* 2x 12V DC Motors rated at 0.82A stall current, so P = 12*0.82*2 = 19.68W
-* Driven with L298N DC Motor Driver (25W max power)
+* 2x 12V DC Motors rated at 0.82A stall current, so P = 12 * 0.82 * 2 = 19.68W
+* L298N DC Motor Driver (25W max power)
 * A microcomputer or microcontroller
   * Raspberry Pi
   * Arduino
@@ -34,11 +34,11 @@ Get GPS Data of Drone -> Get GPS Data of Tracker -> Move the Tracker to follow D
 3. Use tracker computer to compute angle to control the antenna motors.
 
 ## Milestones
-[ ] Learn about MavSDK  
-[ ] Simulate a drone OR use pull live GPS coordinates from a drone's pixhawk  
-[ ] Receive drone position data using mav-sdk with python.  
-[ ] Communicate the drone position data to the antenna tracker computer  
-[ ] Use the antenna tracker computer to compute the new position of the tracker to follow the drone's position  
+- [ ] Learn about MavSDK  
+- [ ] Simulate a drone OR use pull live GPS coordinates from a drone's pixhawk  
+- [ ] Receive drone position data using mav-sdk with python.  
+- [ ] Communicate the drone position data to the antenna tracker computer  
+- [ ] Use the antenna tracker computer to compute the new position of the tracker to follow the drone's position  
 
 
 
