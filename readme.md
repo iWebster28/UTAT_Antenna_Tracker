@@ -34,11 +34,11 @@ Get GPS Data of Drone -> Get GPS Data of Tracker -> Move the Tracker to follow D
 3. Use tracker computer to compute angle to control the antenna motors.
 
 ## Milestones
-[ ] Learn about MavSDK
-[ ] Simulate a drone OR use pull live GPS coordinates from a drone's pixhawk
-[ ] Receive drone position data using mav-sdk with python.
-[ ] Communicate the drone position data to the antenna tracker computer
-[ ] Use the antenna tracker computer to compute the new position of the tracker to follow the drone's position
+[ ] Learn about MavSDK  
+[ ] Simulate a drone OR use pull live GPS coordinates from a drone's pixhawk  
+[ ] Receive drone position data using mav-sdk with python.  
+[ ] Communicate the drone position data to the antenna tracker computer  
+[ ] Use the antenna tracker computer to compute the new position of the tracker to follow the drone's position  
 
 
 
