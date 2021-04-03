@@ -50,8 +50,8 @@ Get GPS Data of Drone -> Get GPS Data of Tracker -> Move the Tracker to follow D
 * **lon** and **lat** angles defined with respect to *center of earth* as ORIGIN
 * alt is defined with respect to surface of earth (sea-level) as reference (0 m)
 
-* **lon** = lambda = angle made with xy-plane (0 deg lon)
-* **lat** = phi = angle made with the z-axis (0 deg is equator/xy-plane)
+* **lon** = lambda = angle made within xy-plane (0 deg lon) where -90 deg = west, +90 deg = east
+* **lat** = phi = angle made with the z-axis (0 deg is equator/xy-plane) where -90 deg = south, +90 deg = north
 
 * Supplied by the Drone's GPS: (assume 2 is the drone for now. May write code to abstract this to deal with corner cases (i.e. -180, etc.))
 * ```<lat2, lon2, alt2>```
@@ -62,8 +62,8 @@ Get GPS Data of Drone -> Get GPS Data of Tracker -> Move the Tracker to follow D
 * Supplied by the Antenna Tracker's Gryo:
 * ```<tracker_theta_xy_gyro, tracker_phi_z_gyro>```
 
-* **tracker_theta_xy_gyro** = the angle the tracker actually makes in the xy plane (NOT lon), treating the tracker as the ORIGIN
-* **tracker_phi_z_gryo** = the angle the tracker actually makes with the z-axis (), treating the tracker as the ORIGIN
+* **tracker_theta_xy_gyro** = the angle the tracker actually makes in the xy plane (this is NOT lon), treating the *tracker* as the ORIGIN
+* **tracker_phi_z_gryo** = the angle the tracker actually makes with the z-axis (this is NOT lat), treating the *tracker* as the ORIGIN
 
 ### Calculations
 
