@@ -6,6 +6,7 @@ import math
 import visualize as vz
 import numpy as np
 
+# figure out why angles are calculated wrongly with this.
 EARTH_RADIUS_METERS = 1 #6378137 #[m]
 # EARTH_RADIUS_METERS = 1
 rad_to_deg = 180/(np.pi)
