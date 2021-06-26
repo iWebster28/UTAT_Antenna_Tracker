@@ -59,25 +59,25 @@ Get GPS Data of Drone -> Get GPS Data of Tracker -> Move the Tracker to follow D
 * Supplied by the Antenna Tracker's GPS:
 * ```<lat1, lon1, alt1>```
 
-* Supplied by the Antenna Tracker's Gryo:
+* Supplied by the Antenna Tracker's gyro:
 * ```<tracker_theta_xy_gyro, tracker_phi_z_gyro>```
 
 * **tracker_theta_xy_gyro** = the angle the tracker actually makes in the xy plane (this is NOT lon), treating the *tracker* as the ORIGIN
-* **tracker_phi_z_gryo** = the angle the tracker actually makes with the z-axis (this is NOT lat), treating the *tracker* as the ORIGIN
+* **tracker_phi_z_gyro** = the angle the tracker actually makes with the z-axis (this is NOT lat), treating the *tracker* as the ORIGIN
 
 ### Calculations
 
-#### Option 1: Tracker can move to **absolute** angle (lat/lon), i.e. using servos and compass/gryo, treating itself as the origin, North as reference for xy-plane angle.
+#### Option 1: Tracker can move to **absolute** angle (lat/lon), i.e. using servos and compass/gyro, treating itself as the origin, North as reference for xy-plane angle.
 
 * phi and delta_lon are the absolute angles to move the servos TO!
 
 * TODO: Make considerations if lon2 > fff or lon2 < ... -> i.e. use abs val? or +180, etc...
 
-* ```"target_phi" = absolute angle to z-axis``` -> target angle to move the tracker to, if xy-plane is 0 deg, and +z is 90 deg [-phi = -z, +phi = +z . The drone's current value of phi is **tracker_phi_z_gryo**]
+* ```"target_phi" = absolute angle to z-axis``` -> target angle to move the tracker to, if xy-plane is 0 deg, and +z is 90 deg [-phi = -z, +phi = +z . The drone's current value of phi is **tracker_phi_z_gyro**]
 
-* ```"target_lon" = lon2 - tracker_theta_xy_gyro``` -> this is not really a delta. It's an absolute target angle to go to. **lon2** is the drone, and **tracker_theta_xy_gryo** is the angle the tracker is currently pointing in the xy-plane (North as 0 deg). 
+* ```"target_lon" = lon2 - tracker_theta_xy_gyro``` -> this is not really a delta. It's an absolute target angle to go to. **lon2** is the drone, and **tracker_theta_xy_gyro** is the angle the tracker is currently pointing in the xy-plane (North as 0 deg). 
 
-* [Note: **lon2** = target angle to move tracker (angle in xy plane), assuming the tracker was pointing directly outwards on lon1. This would be a bad approximation of delta_lon on its own, because we need to take into account the actual direction that tracker is currently pointing, using **tracker_theta_xy_gryo**]
+* [Note: **lon2** = target angle to move tracker (angle in xy plane), assuming the tracker was pointing directly outwards on lon1. This would be a bad approximation of delta_lon on its own, because we need to take into account the actual direction that tracker is currently pointing, using **tracker_theta_xy_gyro**]
 
 #### Option 2: Tracker moves towards the target angle by moving by an incremental angle **relative** to its current direction 
 * until we're within a certain range of error of the true directions.)

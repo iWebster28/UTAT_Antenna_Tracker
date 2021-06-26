@@ -31,19 +31,21 @@ def main():
     # # SURFACE EARTH ORIGIN
     # alt2 = 6
 
+    # Antenna Tracker Coords
     # CENTER EARTH ORIGIN
-    lat1 = 150 * deg_to_rad
-    lon1 = 0 * deg_to_rad
+    lat1 = 15 * deg_to_rad
+    lon1 = 30 * deg_to_rad
     # SURFACE EARTH ORIGIN
     alt1 = 10
 
+    # Drone Coords
     # CENTER EARTH ORIGIN
-    lat2 = 450 * deg_to_rad 
+    lat2 = 45 * deg_to_rad 
 
     # I think conversions are off by a factor of 100 somewhere! i.e. 300 = 30 deg
     # at least, this fixes the calculation for phi
     # target_lon still messed up
-    lon2 = 600 * deg_to_rad #something's wrong with lon scaling when calculating target_lon or lambda
+    lon2 = 60 * deg_to_rad #something's wrong with lon scaling when calculating target_lon or lambda
     # SURFACE EARTH ORIGIN
     alt2 = 20
 
@@ -60,18 +62,36 @@ def main():
     # lat1 = Serial.read()  
 
     # 2. Compute Points
-    lat_avg = (lat1 + lat2) / 2 #for distance between 2 points
-    print(f"lat_avg: {lat_avg}")
 
-    x1 = lon1*math.cos(lat_avg)
-    y1 = lat1 #not lon?
 
-    x2 = lon2*math.cos(lat_avg)
-    y2 = lat2 #not lon?
+    #2.0
+    # lat_avg = (lat1 + lat2) / 2 #for distance between 2 points
+    # print(f"lat_avg: {lat_avg}")
 
+    # x1 = lon1*math.cos(lat_avg)
+    # y1 = lat1
+
+    # x2 = lon2*math.cos(lat_avg)
+    # y2 = lat2
+
+
+
+    # 2.1 some different stuff
+    p1 = EARTH_RADIUS_METERS + alt1
+    p2 = EARTH_RADIUS_METERS + alt2
+    
+    x1 = p1*np.sin(lon1)*np.math.cos(lat1)
+    y1 = p1*np.sin(lon1)*np.sin(lon1)
+    z1 = p1*math.cos(lon1)
+
+    x2 = p2*np.sin(lon2)*np.math.cos(lat2)
+    y2 = p2*np.sin(lon2)*np.sin(lon2)
+    z2 = p2*math.cos(lon2)
+
+
+    # 2.0
     delta_x = x2 - x1
     delta_y = y2 - y1
-
 
     # if (delta_x < 0) delta_x *= -1
     # if (delta_y < 0) delta_y *= -1
@@ -84,8 +104,21 @@ def main():
 
     # 4. Compute angles for servos
 
+
+    # Diff approach to get angles
+    # Treat tracker <x1, y1, alt1> as origin, then draw vector from here to drone, i.e. <x2 - x1, y2 - y1, alt2 - alt1>
+    # Convert these to spherical coords, then just subtract the phis and lambdas to get angles?
+    t2d = [x2 - x1, y2 - y1, alt2 - alt1] #tracker to drone, tracker is origin
+    rel_phi = math.acos(t2d[2]/math.sqrt(t2d[0]*t2d[0] + t2d[1]*t2d[1] + t2d[2]*t2d[2]))*rad_to_deg # arccos(z/sqrt(x^2 + y^2 + z^2))
+    rel_lambda = np.arctan(t2d[1]/t2d[0])*rad_to_deg # y/x
+    print(f"rel_phi: {rel_phi}, rel_lambda: {rel_lambda}")
+
+
+
+
+
     # Option 1
-    target_phi  = (math.atan(delta_alt / d))*rad_to_deg # angle to z-axis
+    target_phi  = (math.atan(delta_alt / d))*rad_to_deg # angle to z-axis - but this is actually measured w Tracker as origin, where 0 deg is earth's surface
     target_lon = (lon2 - tracker_theta_xy_gyro)*rad_to_deg #Do we want in degrees or radians?
 
     # Option 2
@@ -110,7 +143,15 @@ def main():
     # Visualize
     # vz.spherical(target_phi, target_lon)
 
-    vz.vectors([[0, 0, 0, x1, y1, alt1], [0, 0, 0, x1, y1, 0], [x1, y1, 0, 0, 0, alt1], [0, 0, 0, x2, y2, alt2], [0, 0, 0, x2, y2, 0], [x2, y2, 0, 0, 0, alt2]]) 
+    vz.vectors([
+        [0, 0, 0, x1, y1, alt1], 
+        [0, 0, 0, x1, y1, 0], 
+        [x1, y1, 0, 0, 0, alt1], 
+        [0, 0, 0, x2, y2, alt2], 
+        [0, 0, 0, x2, y2, 0], 
+        [x2, y2, 0, 0, 0, alt2],
+        [x1, y1, alt1, x2 - x1, y2 - y1, alt2 - alt1] # Visualize the vector joining these two points
+    ]) 
 
     # it seems like phi and lon are switched?
 
