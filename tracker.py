@@ -105,7 +105,7 @@ def main():
     # 4. Compute angles for servos
 
 
-    # Diff approach to get angles
+    #* Diff approach to get angles
     # Treat tracker <x1, y1, alt1> as origin, then draw vector from here to drone, i.e. <x2 - x1, y2 - y1, alt2 - alt1>
     # Convert these to spherical coords, then just subtract the phis and lambdas to get angles?
     t2d = [x2 - x1, y2 - y1, alt2 - alt1] #tracker to drone, tracker is origin

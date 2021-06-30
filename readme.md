@@ -4,9 +4,9 @@
 1. Get ECEF of antenna tracker (only once at beginning) (Michelangelo)
 2. Get ECEF of drone (Jun Ho)
 3. Find delta ECEF of drone & tracker (makes tracker origin, but directions are still in ECEF) (Jun Ho) 
-4. Use rotation matrix to rotate origin of our tracker coordinates to point north (ECEF -> NED Which axis is north will depend on code) (Stephen)
-5. Convert our delta drone coordinates to spherical (NED_XYZ -> NED_Spherical) (Stephen)
-6. Get gyroscope direction of tracker (NED_Spherical) (Ian)
+4. Use rotation matrix to rotate origin of our tracker coordinates to point north (ECEF -> ENU Which axis is north will depend on code) (Stephen)
+5. Convert our delta drone coordinates to spherical (ENU_XYZ -> ENU_Spherical) (Stephen)
+6. Get gyroscope direction of tracker (ENU_Spherical) (Ian)
 7. Find delta angles between current tracker direction & desired direction (Ian)
 8. Output direction to motors to desired direction (Stephen)
 
