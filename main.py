@@ -12,7 +12,8 @@
 
 import sys
 sys.path.append('./physical')
-from gyro import get_tracker_gyro
+import gyro as gy
+import delta as dl
 
 def main():
     # t2d: tracker to drone
@@ -25,6 +26,7 @@ def main():
     error_t2d_ENU_spherical = [error_phi, error_lambda]
 
     # Init
+    gyro_inst = gy.TrackerGyro() # Instantiate tracker gyro
     tracker_ECEF = get_ecef_tracker() # 1. Get ECEF of antenna tracker (only once at beginning) (Michelangelo)
 
     # Loop
@@ -35,9 +37,9 @@ def main():
     delta_t2d_ENU_spherical = ecef_to_spherical(delta_ENU_XYZ) # 5. Convert our delta drone coordinates to spherical (ENU_XYZ -> ENU_Spherical) (Stephen)
     # Note: just need the delta_phi and delta_lambda. Don't need R; only care about angles.
 
-    tracker_gyro_ENU_spherical = get_tracker_gyro() # 6. Get gyroscope direction of tracker (ENU_Spherical) (Ian)
+    tracker_gyro_ENU_spherical = gyro_inst.get_tracker_gyro() # 6. Get gyroscope direction of tracker (ENU_Spherical) (Ian)
 
-    error_t2d_ENU_spherical = get_tracker_drone_delta(delta_t2d_ENU_spherical, tracker_gyro_ENU_spherical) # 7. Find delta angles between current tracker direction & desired direction (Ian)
+    error_t2d_ENU_spherical = dl.get_tracker_drone_delta(delta_t2d_ENU_spherical, tracker_gyro_ENU_spherical) # 7. Find delta angles between current tracker direction & desired direction (Ian)
 
     # 8. Output direction to motors to desired direction (Stephen)
     move_tracker(error_t2d_ENU_spherical)
