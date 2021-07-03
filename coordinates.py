@@ -12,17 +12,17 @@ def conv_enu(llh,ecef_ref,ecef_target):
     enu = mat.dot(np.array(ecef_target)-np.array(ecef_ref))
     return enu
 
-# def conv_llh_enu(llh):
-#     ecef = llh_to_ecef(llh)
-#     mat = generate_enu_matrix(llh)
-#     enu = mat.dot(np.array(ecef))
-#     return enu
-#
-# def conv_ecef_enu(ecef):
-#     llh = ecef_to_llh(ecef)
-#     mat = generate_enu_matrix(llh)
-#     enu = mat.dot(np.array(ecef))
-#     return enu
+def conv_llh_enu(llh):
+    ecef = llh_to_ecef(llh)
+    mat = generate_enu_matrix(llh)
+    enu = mat.dot(np.array(ecef))
+    return enu
+
+def conv_ecef_enu(ecef):
+    llh = ecef_to_llh(ecef)
+    mat = generate_enu_matrix(llh)
+    enu = mat.dot(np.array(ecef))
+    return enu
 
 
 def llh_to_ecef(llh_coords):
@@ -57,6 +57,6 @@ if(__name__=="__main__"):
     # print(conv_enu(np.array([90,0,0]),llh_to_ecef(np.array([90,0,0]))))
     # print(conv_llh_enu(llh))
     # print(conv_ecef_enu(ecef))
-    print(conv_enu(llh,ecef,ecef2))
+    # print(conv_enu(llh,ecef,ecef2))
     # conv_enu(llh,ecef,ecef2)
     # print(llh_to_ecef(np.array([90,0,0])))
