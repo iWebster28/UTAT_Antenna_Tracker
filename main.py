@@ -10,6 +10,10 @@
 # 7. Find delta angles between current tracker direction & desired direction (Ian)
 # 8. Output direction to motors to desired direction (Stephen)
 
+import sys
+sys.path.append('./physical')
+from gyro import get_tracker_gyro
+
 def main():
     # t2d: tracker to drone
     tracker_ECEF = [x_t, y_t, z_t]
