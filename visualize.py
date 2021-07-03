@@ -1,25 +1,14 @@
-lat1 = 10 
-lon1 = 3
-# SURFACE EARTH ORIGIN
-alt1 = 3
+###
+# =================================
+# 3D surface with polar coordinates
+# =================================
 
-# CENTER EARTH ORIGIN
-lat2 = 10
-lon2 = 6
-# SURFACE EARTH ORIGIN
-alt2 = 6
+# Demonstrates plotting a surface defined in polar coordinates.
+# Uses the reversed version of the YlGnBu color map.
+# Also demonstrates writing axis labels with latex math mode.
 
-'''
-=================================
-3D surface with polar coordinates
-=================================
-
-Demonstrates plotting a surface defined in polar coordinates.
-Uses the reversed version of the YlGnBu color map.
-Also demonstrates writing axis labels with latex math mode.
-
-Example contributed by Armin Moser.
-'''
+# Example contributed by Armin Moser.
+###
 
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import pyplot as plt
@@ -32,7 +21,7 @@ import numpy as np
 #     # polar()
 #     spherical()
 
-
+# Demo polar system
 def polar():
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
@@ -57,9 +46,8 @@ def polar():
 
     plt.show()
 
-
+# Demo spherical system
 def spherical(_phi, _theta):
-
     if _theta > 2 * np.pi:
         print("input pi large")
     if _phi > np.pi:
@@ -79,6 +67,8 @@ def spherical(_phi, _theta):
 
     plt.show()
 
+# Input: list of vectors in format: [x1, y1, z1, x2, y2, z2], where vector spans P_start = [x1, y1, z1] to P_end = [x2, y2, z2]
+# Output: 3D Plot of vectors. Need to define x, y, and z ranges manually.
 def vectors(vectors):
     print(vectors)
     soa = np.array(vectors)

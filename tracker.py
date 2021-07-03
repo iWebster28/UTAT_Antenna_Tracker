@@ -17,8 +17,22 @@ def main():
     
     # 1. Read in 3 doubles, lat, lon, alt - separated by commas. How to do this? Read comma-separated data into separate doubles?
 
+    # ----------------
+    # lat1 = 10 
+    # lon1 = 3
+    # # SURFACE EARTH ORIGIN
+    # alt1 = 3
+
+    # # CENTER EARTH ORIGIN
+    # lat2 = 10
+    # lon2 = 6
+    # # SURFACE EARTH ORIGIN
+    # alt2 = 6
+    #-----------------
+
     # Make sure this test case actually works
 
+    # ----------------
     # # CENTER EARTH ORIGIN
     # lat1 = 10 
     # lon1 = 3
@@ -30,6 +44,7 @@ def main():
     # lon2 = 6
     # # SURFACE EARTH ORIGIN
     # alt2 = 6
+    # ----------------
 
     # Antenna Tracker Coords
     # CENTER EARTH ORIGIN
@@ -152,8 +167,6 @@ def main():
         [x2, y2, 0, 0, 0, alt2],
         [x1, y1, alt1, x2 - x1, y2 - y1, alt2 - alt1] # Visualize the vector joining these two points
     ]) 
-
-    # it seems like phi and lon are switched?
 
 if __name__ == "__main__":
     main()
