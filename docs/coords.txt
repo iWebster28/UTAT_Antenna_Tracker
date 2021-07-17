@@ -1,12 +1,4 @@
-
-
-
-
-
-
-
 # Spherical to Rectangular
-
 
 x = p*np.sin(phi)*np.cos(lambda)
 y = p*np.sin(phi)*np.sin(phi)
