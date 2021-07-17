@@ -12,6 +12,7 @@
 
 import sys
 sys.path.append('./physical')
+sys.path.append('./utils')
 import gyro as gy
 import delta as dl
 
