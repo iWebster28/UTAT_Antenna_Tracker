@@ -1,5 +1,15 @@
 ## Antenna Tracker Project - UTAT UAS 2021
 
+### Functional Summary and Assignment
+1. Get ECEF of antenna tracker (only once at beginning) (Michelangelo)
+2. Get ECEF of drone (Jun Ho)
+3. Find delta ECEF of drone & tracker (makes tracker origin, but directions are still in ECEF) (Jun Ho) 
+4. Use rotation matrix to rotate origin of our tracker coordinates to point north (ECEF -> ENU Which axis is north will depend on code) (Stephen)
+5. Convert our delta drone coordinates to spherical (ENU_XYZ -> ENU_Spherical) (Stephen)
+6. Get gyroscope direction of tracker (ENU_Spherical) (Ian)
+7. Find delta angles between current tracker direction & desired direction (Ian)
+8. Output direction to motors to desired direction (Stephen)
+
 Ian Webster  
 UTAT UAS | RnD Division  
 
@@ -39,7 +49,6 @@ Get GPS Data of Drone -> Get GPS Data of Tracker -> Move the Tracker to follow D
 - [ ] Receive drone position data using mav-sdk with python.  
 - [ ] Communicate the drone position data to the antenna tracker computer  
 - [ ] Use the antenna tracker computer to compute the new position of the tracker to follow the drone's position  
-
 
 ### Tracker Algorithm
 

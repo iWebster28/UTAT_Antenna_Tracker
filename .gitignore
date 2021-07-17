@@ -1,5 +1,7 @@
+.vscode
 Arduino
 MAVSDK-Python
 Antenna Tracker Summary.pdf
 __pycache__
+*.pyc
 env
