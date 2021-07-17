@@ -1,3 +1,7 @@
+import os
+import sys
+sys.path.insert(0,os.path.abspath('..'))
+
 import numpy as np
 import pyproj
 
@@ -8,6 +12,17 @@ gps_coords_epsg="epsg:4326"
 ecef_coords_epsg="epsg:4978"
 
 def conv_enu(llh,ecef_ref,ecef_target):
+    """Converts a vector (equalling ecef_target-ecef_ref) in ECEF coordinates into ENU coordinates. Can be used to convert ECEF coordinates into ENU coordinates
+
+    :param llh: (lat,lon,height) reference point coordinates in LLH
+    :type llh: ndarray
+    :param ecef_ref: (x,y,z) reference point coordinates in ECEF
+    :type ecef_ref: ndarray
+    :param ecef_target: (x,y,z) target location coordinates in ECEF
+    :type ecef_target: ndarray
+    :return: (x,y,z) vector from reference to target location in ENU coordinates
+    :rtype: ndarray
+    """
     mat = generate_enu_matrix(llh)
     enu = mat.dot(np.array(ecef_target)-np.array(ecef_ref))
     return enu
@@ -24,16 +39,36 @@ def conv_ecef_enu(ecef):
     enu = mat.dot(np.array(ecef))
     return enu
 
-
 def llh_to_ecef(llh_coords):
+    """Convert ECEF coordinates to LLH
+
+    :param ecef: (lat,lon,height) reference point coordinates in LLH
+    :type ecef: ndarray
+    :return: (x,y,z) reference point coordinates in ECEF
+    :rtype: ndarray
+    """
     trans = Transformer.from_crs(gps_coords_epsg,ecef_coords_epsg)
     return np.array(trans.transform(*llh_coords))
 
 def ecef_to_llh(ecef_coords):
+    """Convert ECEF coordinates to LLH
+
+    :param ecef: (x,y,z) reference point coordinates in ECEF
+    :type ecef: ndarray
+    :return: (lat,lon,height) reference point coordinates in LLH
+    :rtype: ndarray
+    """
     trans = Transformer.from_crs(ecef_coords_epsg,gps_coords_epsg)
     return np.array(trans.transform(*ecef_coords))
 
 def generate_enu_matrix(llh):
+    """Generates coordinate transform matrix (from LLH to ENU)
+
+    :param llh: (lat,lon,height) reference point coordinates in LLH
+    :type llh: ndarray
+    :return: A rotation (coordinate transform) matrix in ENU coordinates
+    :rtype: ndarray
+    """
     (theta, phi, h) = llh
     return np.array([
         [-sin(theta),cos(theta),0],
@@ -48,6 +83,7 @@ if(__name__=="__main__"):
     print("ECEF coordinates: ")
     print(ecef)
     print(ecef2)
+    print(conv_enu(llh,ecef,ecef2))
     print()
     # coords = llh_to_ecef(llh)
     # print(coords)
