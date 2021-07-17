@@ -1,12 +1,8 @@
-import os
-import sys
-sys.path.insert(0,os.path.abspath('..'))
-
 import numpy as np
 import pyproj
 
 from pyproj import CRS, Transformer, transform
-from math import sin, cos, atan2, pi
+from math import sin, cos, atan2, pi, sqrt
 
 gps_coords_epsg="epsg:4326"
 ecef_coords_epsg="epsg:4978"
@@ -61,6 +57,20 @@ def ecef_to_llh(ecef_coords):
     trans = Transformer.from_crs(ecef_coords_epsg,gps_coords_epsg)
     return np.array(trans.transform(*ecef_coords))
 
+def enu_cart_to_enu_sphere(enu):
+    """Convert ENU cartesian coordinates to ENU spherical.
+
+    :param ecef: (x,y,z) reference point coordinates in ENU cartesian
+    :type ecef: ndarray
+    :return: (theta,phi,rho) reference point coordinates in ENU spherical
+    :rtype: ndarray
+    """
+    (x, y, z) = enu
+    rho = np.sqrt(x*x+y*y+z*z)
+    theta = np.arctan2(y,x)
+    phi = np.arccos(z/rho)
+    return (theta,phi,rho)
+
 def generate_enu_matrix(llh):
     """Generates coordinate transform matrix (from LLH to ENU)
 
@@ -83,8 +93,9 @@ if(__name__=="__main__"):
     print("ECEF coordinates: ")
     print(ecef)
     print(ecef2)
-    print(conv_enu(llh,ecef,ecef2))
-    print()
+    test_enu = conv_enu(llh,ecef,ecef2)
+    print(test_enu)
+    print(enu_cart_to_enu_sphere(test_enu))
     # coords = llh_to_ecef(llh)
     # print(coords)
     # print(ecef_to_llh(ecef))
