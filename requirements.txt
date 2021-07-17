@@ -1,3 +1,2 @@
-mavsdk
-aioconsole
+matplotlib
 pyproj
