@@ -17,20 +17,16 @@ class Motor():
 			self.IN2 = IN2
 
 		# setup GPIO
-
 		GPIO.setup(self.IN1,GPIO.OUT)
 		GPIO.setup(self.IN2,GPIO.OUT)
-		#GPIO.setup(self.EN,GPIO.OUT)
 		GPIO.output(self.IN1,GPIO.LOW)
 		GPIO.output(self.IN2,GPIO.LOW)
-		#self.p = GPIO.PWM(self.EN,1000)
 
 	def __del__(self):
+		# stop GPIO connections
 		GPIO.cleanup()		
 
 	def rotate(self,direction=1):
-		print("Here")
-		#self.p.ChangeDutyCycle(75)
 		if(direction == 1):
 			GPIO.output(self.IN1,GPIO.HIGH)
 			GPIO.output(self.IN2,GPIO.LOW)
