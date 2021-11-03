@@ -15,3 +15,4 @@ class TrackerGyro():
         """
         # Todo: higher poll rate, and read average of prev. queue of data points.
         return self.IMU.prevAngle[0]
+
