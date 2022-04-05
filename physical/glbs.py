@@ -9,7 +9,7 @@ def init():
     # H-bridge motor pins
     global MOTOR_PIN_1, MOTOR_PIN_2, MOTOR_PIN_3, MOTOR_PIN_4
 
-    # TODO: populate this properly
+    # TODO: populate this according to HW.
     MOTOR_PIN_1 = 0
     MOTOR_PIN_2 = 1
     MOTOR_PIN_3 = 2
@@ -19,14 +19,14 @@ def init():
     global PHI_RANGE_DEG, LAMBDA_RANGE_DEG
     global MAX_RPM_PHI, MAX_RPM_LAMBDA
 
-    MAX_PHI_SEC = 20 
-    MAX_LAMBDA_SEC = 40 
+    MAX_PHI_SEC = 20.0
+    MAX_LAMBDA_SEC = 40.0 
 
-    PHI_RANGE_DEG = 90
-    LAMBDA_RANGE_DEG = 360
-
-    MAX_RPM_PHI = (PHI_RANGE_DEG/360) / (MAX_PHI_SEC/60) # rotation forward to upright
-    MAX_RPM_LAMBDA = (LAMBDA_RANGE_DEG/360) / (MAX_LAMBDA_SEC/60)  # rotation about base
+    PHI_RANGE_DEG = 90.0
+    LAMBDA_RANGE_DEG = 360.0
+    
+    MAX_RPM_PHI = (PHI_RANGE_DEG/360.0) / (MAX_PHI_SEC/60.0) # rotation forward to upright
+    MAX_RPM_LAMBDA = (LAMBDA_RANGE_DEG/360.0) / (MAX_LAMBDA_SEC/60.0)  # rotation about base
 
     # Test
     global fake_motor_phi_deg, fake_motor_lambda_deg

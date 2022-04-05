@@ -1,7 +1,7 @@
-## Antenna Tracker Project - UTAT UAS 2021
+## Legacy Antenna Tracker Project - UTAT UAS 2021
 
 ### Functional Summary and Assignment
-1. Get ECEF of antenna tracker (only once at beginning) (Michelangelo)
+1. Get ECEF of antenna tracker (only once at beginning) (Hitansh)
 2. Get ECEF of drone (Jun Ho)
 3. Find delta ECEF of drone & tracker (makes tracker origin, but directions are still in ECEF) (Jun Ho) 
 4. Use rotation matrix to rotate origin of our tracker coordinates to point north (ECEF -> ENU Which axis is north will depend on code) (Stephen)

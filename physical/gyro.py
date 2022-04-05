@@ -11,7 +11,7 @@ class TrackerGyro():
         """
         if g.SW_SIMULATION:
             print("SW_SIMULATION mode. No TrackerGyro init. Set self.test_angle = [0.0, 0.0]")
-            self.test_angle = [(np.pi/180) * g.fake_motor_phi_deg, (np.pi/180) * g.fake_motor_lambda_deg]
+            self.test_angle = [(np.pi/180.0) * g.fake_motor_phi_deg, (np.pi/180.0) * g.fake_motor_lambda_deg]
         else:
             self.IMU = MinIMU_v5_pi()
             self.IMU.trackAngle()
@@ -22,10 +22,10 @@ class TrackerGyro():
         in format [x_axis, y_axis] (ignore z_axis).
         Return in radians.
         """
-        # Todo: higher poll rate, and read average of prev. queue of data points.
+        # TODO: higher poll rate, and read average of prev. queue of data points.
         if g.SW_SIMULATION:
             print("SW_SIMULATION mode. Return [g.fake_motor_phi, g.fake_motor_lambda] for TrackerGyro poll.")
-            return [(np.pi/180) * g.fake_motor_phi_deg, (np.pi/180) * g.fake_motor_lambda_deg]
+            return [(np.pi/180.0) * g.fake_motor_phi_deg, (np.pi/180.0) * g.fake_motor_lambda_deg]
         else:
-            return [(np.pi/180) * self.IMU.prevAngle[0][0], (np.pi/180) * self.IMU.prevAngle[0][0]] #only return [x_axis, y_axis] (ignore z_axis)
+            return [(np.pi/180.0) * self.IMU.prevAngle[0][0], (np.pi/180.0) * self.IMU.prevAngle[0][0]] #only return [x_axis, y_axis] (ignore z_axis)
 
