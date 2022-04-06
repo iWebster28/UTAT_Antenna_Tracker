@@ -15,35 +15,35 @@ You will need to re-generate the docs if you document more functions.
 1. `sphinx-apidoc -o . .. --ext-autodoc` # Run this if you change files
 2. `make html`
 3. Open `docs/_build` in your browser.
-# [Guide](https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html)
+[Guide](https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html)
 
 ### Sphinx Documentation Quickstart
 
 """
 [Summary]
 
-:param [ParamName]: [ParamDescription], defaults to [DefaultParamVal]
-:type [ParamName]: [ParamType](, optional)
-...
-:raises [ErrorType]: [ErrorDescription]
-...
-:return: [ReturnDescription]
-:rtype: [ReturnType]
-"""
+:param [ParamName]: [ParamDescription], defaults to [DefaultParamVal]  
+:type [ParamName]: [ParamType](, optional)  
+...  
+:raises [ErrorType]: [ErrorDescription]  
+...  
+:return: [ReturnDescription]  
+:rtype: [ReturnType]  
+"""  
 
-"""
-Send a message to a recipient
-
-:param str sender: The person sending the message
-:param str recipient: The recipient of the message
-:param str message_body: The body of the message
-:param priority: The priority of the message, can be a number 1-5
-:type priority: integer or None
-:return: the message id
-:rtype: int
-:raises ValueError: if the message_body exceeds 160 characters
-:raises TypeError: if the message_body is not a basestring
-"""
+"""  
+Send a message to a recipient  
+  
+:param str sender: The person sending the message  
+:param str recipient: The recipient of the message  
+:param str message_body: The body of the message  
+:param priority: The priority of the message, can be a number 1-5  
+:type priority: integer or None  
+:return: the message id  
+:rtype: int   
+:raises ValueError: if the message_body exceeds 160 characters  
+:raises TypeError: if the message_body is not a basestring  
+"""  
 
 ### TODO (4-5-22)
 
