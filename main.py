@@ -29,6 +29,8 @@ import gyro as gy
 import delta as dl
 import coordinates as co
 from move import Motors
+import tracker_gps
+import drone_pixhawk
 
 import numpy as np
 from time import sleep
@@ -46,14 +48,14 @@ def main():
     # Init
     gyro_inst = gy.TrackerGyro() # Instantiate tracker gyro
     motors_inst = Motors() # Instantiate motors
-    tracker_ECEF = get_ecef_tracker() # 1. Get ECEF of antenna tracker (only once at beginning) (Hitansh)
+    tracker_ECEF = tracker_gps.get_ecef_tracker() # 1. Get ECEF of antenna tracker (only once at beginning) (Hitansh)
 
     error_t2d_ENU_spherical = [1, 1] # init
 
     # TODO: add a safety stop.
     # Loop
     while (True):
-        drone_ECEF = get_ecef_drone() # 2. Get ECEF of drone (Jun Ho)
+        drone_ECEF = drone_pixhawk.get_ecef_drone() # 2. Get ECEF of drone (Jun Ho)
         delta_t2d_ECEF = dl.get_delta_t2d_ECEF(tracker_ECEF, drone_ECEF) # 3. Find delta ECEF of drone & tracker (makes tracker origin, but directions are still in ECEF) (Jun Ho)
 
         delta_ENU_XYZ = co.conv_ecef_enu(delta_t2d_ECEF) # 4. Use rotation matrix to rotate origin of our tracker coordinates to point north (ECEF -> ENU_XYZ Which axis is north will depend on code) (Stephen)
@@ -74,22 +76,6 @@ def main():
         sleep(g.LOOP_UPDATE_SEC)
         
     return
-
-
-# TODO: Temporary functions: to be implemented in utils/physical upon receiving HW
-def get_ecef_tracker():
-    # TODO: To be pulled from antenna tracker GPS (Hitansh)
-    llh = np.array([0,0,0])
-    tracker_ECEF = co.llh_to_ecef(llh)
-    print("ECEF of antenna tracker: \n{:>20} {:>20} {:>20}".format(*tracker_ECEF))
-    return tracker_ECEF
-
-def get_ecef_drone():
-    # TIODO: To be pulled from drone pixhawk (Jun Ho)
-    llh = np.array([0,1,0])
-    drone_ECEF = co.llh_to_ecef(llh)
-    print("ECEF of drone: \n{:>20} {:>20} {:>20}".format(*drone_ECEF))
-    return drone_ECEF
 
 if __name__ == "__main__":
     main()
