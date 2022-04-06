@@ -1,4 +1,67 @@
-## Legacy Antenna Tracker Project - UTAT UAS 2021
+## Antenna Tracker Project - UTAT UAS 2021
+### Getting Started with this repo
+1. `pip install -r requirements.txt`
+2. `python main.py`
+
+### Codebase
+- `physical` pertains to any physical components of the project, i.e. Antenna tracker GPS, Drone Pixhawk, DC motor drivers and H-bridge, Rasberry Pi GPIO setup, etc.  
+- `simulation` contains software to visualize the drone and tracker in 3D space. Install `matplotlib` with pip if you're interested.
+- `test` should be created to run HW and SW tests.
+- `legacy` is for older unused code.
+- `docs` is auto-generated sphinx documentation that can be viewed in your browser. If you have vscode, install the Live Server extension, and open up `docs/_build` to see the HTML docs.
+  - [Writing "docstrings" in sphinx](https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html)
+### Building Docs with Sphinx
+You will need to re-generate the docs if you document more functions.
+1. `sphinx-apidoc -o . .. --ext-autodoc` # Run this if you change files
+2. `make html`
+3. Open `docs/_build` in your browser.
+# [Guide](https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html)
+
+### Sphinx Documentation Quickstart
+
+"""
+[Summary]
+
+:param [ParamName]: [ParamDescription], defaults to [DefaultParamVal]
+:type [ParamName]: [ParamType](, optional)
+...
+:raises [ErrorType]: [ErrorDescription]
+...
+:return: [ReturnDescription]
+:rtype: [ReturnType]
+"""
+
+"""
+Send a message to a recipient
+
+:param str sender: The person sending the message
+:param str recipient: The recipient of the message
+:param str message_body: The body of the message
+:param priority: The priority of the message, can be a number 1-5
+:type priority: integer or None
+:return: the message id
+:rtype: int
+:raises ValueError: if the message_body exceeds 160 characters
+:raises TypeError: if the message_body is not a basestring
+"""
+
+### TODO (4-5-22)
+
+#### Design
+- [ ] Implement `physical/drone_pixhawk.py` to work with HW.
+- [ ] Implement `physical/tracker_gps.py` to work with HW.
+- [ ] `physical/delta.py` determine how direction will be inferred.
+- [ ] `physical/gryo.py` reduce amount of intermediary math. i.e. just keep all measurements in radians, or degrees.
+- [ ] `physical/move.py` 
+  - [ ] write a class to interface with DC motor HW. May include/be separate from H bridge driver. Need to know how to use GPIO on Raspberry Pi
+  - [ ] determine how direction will be inferred.
+- [ ] Implement tests for each HW component.
+#### Extra
+- [ ] Document all functions with Sphinx.
+- [ ] Separate drone and tracker code (2 separate physical folders)
+
+
+## Legacy: 2021
 
 ### Functional Summary and Assignment
 1. Get ECEF of antenna tracker (only once at beginning) (Hitansh)
@@ -44,8 +107,7 @@ Get GPS Data of Drone -> Get GPS Data of Tracker -> Move the Tracker to follow D
 3. Use tracker computer to compute angle to control the antenna motors.
 
 ## Milestones
-- [ ] Learn about MavSDK  
-- [ ] Simulate a drone OR use pull live GPS coordinates from a drone's pixhawk  
+- [x] Simulate a drone OR use pull live GPS coordinates from a drone's pixhawk - Ian Webster  
 - [ ] Receive drone position data using mav-sdk with python.  
 - [ ] Communicate the drone position data to the antenna tracker computer  
 - [ ] Use the antenna tracker computer to compute the new position of the tracker to follow the drone's position  
