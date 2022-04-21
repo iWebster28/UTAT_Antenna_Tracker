@@ -1,2 +1,4 @@
-matplotlib
+numpy
 pyproj
+sphinx_rtd_theme
+matplotlib
