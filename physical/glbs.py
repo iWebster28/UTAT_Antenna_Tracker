@@ -2,7 +2,11 @@
 def init():
     # General
     global SW_SIMULATION 
-    SW_SIMULATION = True # No HW
+    SW_SIMULATION = False #True # No HW
+
+    # Enable debug print messages
+    global DEBUG_MODE
+    DEBUG_MODE = True 
 
     # --- Tracker ---
 
@@ -10,8 +14,8 @@ def init():
     global MOTOR_PIN_1, MOTOR_PIN_2, MOTOR_PIN_3, MOTOR_PIN_4
 
     # TODO: populate this according to HW.
-    MOTOR_PIN_1 = 0
-    MOTOR_PIN_2 = 1
+    MOTOR_PIN_1 = 23
+    MOTOR_PIN_2 = 24
     MOTOR_PIN_3 = 2
     MOTOR_PIN_4 = 3
 
